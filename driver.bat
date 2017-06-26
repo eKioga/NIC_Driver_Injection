@@ -1,0 +1,19 @@
+REM Driver Injection script by Eric Post
+REM This script was designed to be ran off of a USB Flash Drive when 
+REM the MDT PXE PE enviroment fails to find a NIC driver. 
+REM This was a typical issue for Dell E74XX series.
+ECHO off
+ECHO ..................................................
+ECHO     Attempting to install the E7470 LAN Driver
+ECHO ..................................................
+drvload D:\E7470_LAN_Driver\E1D65x64.inf
+drvload E:\E7470_LAN_Driver\E1D65x64.inf
+drvload F:\E7470_LAN_Driver\E1D65x64.inf
+ECHO ..................................................
+ECHO         Attempting to start the network.
+ECHO ..................................................
+wpeutil initializeNetwork
+ECHO ..................................................
+ECHO If you see an IP address below, continue with MDT.
+ECHO ..................................................
+Ipconfig
